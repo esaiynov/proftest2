@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Опросник по профориентации</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 30px auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            font-size: 24px;
+            text-align: center;
+        }
+
+        .question {
+            margin-bottom: 20px;
+        }
+
+        .question p {
+            font-size: 18px;
+        }
+
+        .question input[type="radio"] {
+            margin-right: 10px;
+        }
+
+        .question label {
+            font-size: 16px;
+            line-height: 1.5;
+        }
+
+        .button {
+            display: inline-block;
+            background-color: rgb(46 42 185);
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 16px;
+            margin: 20px 2px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .button:hover {
+            background-color: rgb(65, 60, 185);
+            transform: scale(1.05);
+        }
+
+        .button:active {
+            background-color: rgb(58, 52, 212);
+            transform: scale(0.95);
+        }
+
+        .result {
+            margin-top: 20px;
+            font-weight: bold;
+            font-size: 20px;
+            color: rgb(45, 41, 159);
+        }
+
+        .img {
+            height: 40px;
+            width: 80px;
+            background-color: rgb(46 42 185);
+            border-radius: 10px;
+            padding: 10px;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                margin: 15px;
+                padding: 10px;
+            }
+
+            h1 {
+                font-size: 20px;
+            }
+
+            .question p {
+                font-size: 16px;
+            }
+
+            .question label {
+                font-size: 14px;
+            }
+
+            .button {
+                padding: 8px 16px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <img src="LogNewWhite.png" class="img" alt="">
+        <h1>Опросник по профориентации</h1>
+        <div id="nameInput">
+            <label for="name">Введите ваше имя:</label>
+            <input type="text" id="name" name="name"><br>
+            <button type="button" class="button" onclick="startTest()">Начать тестирование</button>
+        </div>
+        <div id="test" style="display: none;">
+            <div id="progress">1/20</div>
+            <form id="survey">
+                <div class="question" id="q1">
+                    <p>1. Какую работу вы бы предпочли?</p>
+                    <input type="radio" name="q1" value="A"> А) Обучение и воспитание детей<br>
+                    <input type="radio" name="q1" value="B"> Б) Изучение природных явлений<br>
+                    <input type="radio" name="q1" value="C"> В) Разработка новых технологий<br>
+                    <input type="radio" name="q1" value="D"> Г) Анализ данных, статистика
+                    <br><button type="button" class="button" onclick="nextQuestion(2)">Следующий вопрос</button>
+                </div>
+                <div class="question" style="display:none;" id="q2">
+                    <p>2. Что вам ближе?</p>
+                    <input type="radio" name="q2" value="A"> А) Уход за больными людьми<br>
+                    <input type="radio" name="q2" value="B"> Б) Выращивание растений<br>
+                    <input type="radio" name="q2" value="C"> В) Конструирование машин<br>
+                    <input type="radio" name="q2" value="D"> Г) Работа с компьютерными программами
+                    <br><button type="button" class="button" onclick="nextQuestion(3)">Следующий вопрос</button>
+                </div>
+                <div class="question" style="display:none;" id="q3">
+                    <p>3. Чем вы бы хотели заниматься?</p>
+                    <input type="radio" name="q3" value="A"> А) Организация мероприятий<br>
+                    <input type="radio" name="q3" value="B"> Б) Экологический мониторинг<br>
+                    <input type="radio" name="q3" value="C"> В) Разработка электронных устройств<br>
+                    <input type="radio" name="q3" value="D"> Г) Изучение иностранных языков
+                    <br><button type="button" class="button" onclick="nextQuestion(4)">Следующий вопрос</button>
+                </div>
+                <div class="question" style="display:none;" id="q4">
+                    <p>4. Какая деятельность вам интереснее?</p>
+                    <input type="radio" name="q4" value="A"> А) Психологическая помощь людям<br>
+                    <input type="radio" name="q4" value="B"> Б) Исследование животного мира<br>
+                    <input type="radio" name="q4" value="C"> В) Создание программного обеспечения<br>
+                    <input type="radio" name="q4" value="D"> Г) Ведение документации, архивирование
+                    <br><button type="button" class="button" onclick="nextQuestion(5)">Следующий вопрос</button>
+                </div>
+                <div class="question" style="display:none;" id="q5">
+                    <p>5. В какой сфере вы видите себя?</p>
+                    <input type="radio" name="q5" value="A"> А) В области социальной работы<br>
+                    <input type="radio" name="q5" value="B"> Б) В сельском хозяйстве<br>
+                    <input type="radio" name="q5" value="C"> В) В авиастроении<br>
+                    <input type="radio" name="q5" value="D"> Г) В бухгалтерии, финансах
+                    <br><button type="button" class="button" onclick="nextQuestion(6)">Следующий вопрос</button>
+                </div>
+                <div class="question" style="display:none;" id="q6">
+                    <p>6. Что вас привлекает больше?</p>
+                    <input type="radio" name="q6" value="A"> А) Работа в команде над общим проектом<br>
+                    <input type="radio" name="q6" value="B"> Б) Изучение геологических процессов<br>
+                    <input type="radio" name="q6" value="C"> В) Испытание новых механизмов<br>
+                    <input type="radio" name="q6" value="D"> Г) Разработка информационных систем
+                    <br><button type="button" class="button" onclick="nextQuestion(7)">Следующий вопрос</button>
+                </div>
+                <div class="question" style="display:none;" id="q7">
+                    <p>7. Что для вас важнее в работе?</p>
+                    <input type="radio" name="q7" value="A"> А) Возможность помогать людям<br>
+                    <input type="radio" name="q7" value="B"> Б) Возможность наблюдать за природой<br>
+                    <input type="radio" name="q7" value="C"> В) Возможность изобретать новое<br>
+                    <input type="radio" name="q7" value="D"> Г) Возможность работать с большим объемом информации
+                    <br><button type="button" class="button" onclick="nextQuestion(8)">Следующий вопрос</button>
+                </div>
+                <div class="question" style="display:none;" id="q8">
+                    <p>8. Какую деятельность вы предпочтете?</p>
+                    <input type="radio" name="q8" value="A"> А) Работу в образовательных учреждениях<br>
+                    <input type="radio" name="q8" value="B"> Б) Исследование климатических изменений<br>
+                    <input type="radio" name="q8" value="C"> В) Проектирование зданий и сооружений<br>
+                    <input type="radio" name="q8" value="D"> Г) Анализ рыночных тенденций
+                    <br><button type="button" class="button" onclick="nextQuestion(9)">Следующий вопрос</button>
+                </div>
+                <div class="question" style="display:none;" id="q9">
+                    <p>9. Какой тип задач вам нравится решать?</p>
+                    <input type="radio" name="q9" value="A"> А) Организационные, связанные с планированием<br>
+                    <input type="radio" name="q9" value="B"> Б) Научно-исследовательские<br>
+                    <input type="radio" name="q9" value="C"> В) Технические, связанные с конструированием<br>
+                    <input type="radio" name="q9" value="D"> Г) Логические, связанные с анализом
+                    <br><button type="button" class="button" onclick="nextQuestion(10)">Следующий вопрос</button>
+                </div>
+                <div class="question" style="display:none;" id="q10">
+                    <p>10. Что вам кажется более увлекательным?</p>
+                    <input type="radio" name="q10" value="A"> А) Работа с детьми, их развитие и обучение<br>
+                    <input type="radio" name="q10" value="B"> Б) Ведение наблюдений за погодными условиями<br>
+                    <input type="radio" name="q10" value="C"> В) Создание новых моделей транспортных средств<br>
+                    <input type="radio" name="q10" value="D"> Г) Изучение новых методов обработки информации
+                    <br><button type="button" class="button" onclick="nextQuestion(11)">Следующий вопрос</button>
+                </div>
+                <div class="question" style="display:none;" id="q11">
+                    <p>11. В какой области вы хотели бы работать?</p>
+                    <input type="radio" name="q11" value="A"> А) В сфере здравоохранения<br>
+                    <input type="radio" name="q11" value="B"> Б) В области ботаники или зоологии<br>
+                    <input type="radio" name="q11" value="C"> В) В сфере космических исследований<br>
+                    <input type="radio" name="q11" value="D"> Г) В области кибернетики, робототехники
+                    <br><button type="button" class="button" onclick="nextQuestion(12)">Следующий вопрос</button>
+                </div>
+                <div class="question" style="display:none;" id="q12">
+                    <p>12. Что вы цените в профессии?</p>
+                    <input type="radio" name="q12" value="A"> А) Возможность влиять на жизнь людей<br>
+                    <input type="radio" name="q12" value="B"> Б) Возможность улучшать состояние окружающей среды<br>
+                    <input type="radio" name="q12" value="C"> В) Возможность внедрять инновации в технике<br>
+                    <input type="radio" name="q12" value="D"> Г) Возможность управлять большими данными
+                    <br><button type="button" class="button" onclick="nextQuestion(13)">Следующий вопрос</button>
+                </div>
+                <div class="question" style="display:none;" id="q13">
+                    <p>13. Какие задачи вам кажутся интересными?</p>
+                    <input type="radio" name="q13" value="A"> А) Разработка образовательных программ<br>
+                    <input type="radio" name="q13" value="B"> Б) Изучение влияния человека на природу<br>
+                    <input type="radio" name="q13" value="C"> В) Повышение эффективности производства<br>
+                    <input type="radio" name="q13" value="D"> Г) Создание баз данных, обработка информации
+                    <br><button type="button" class="button" onclick="nextQuestion(14)">Следующий вопрос</button>
+                </div>
+                <div class="question" style="display:none;" id="q14">
+                    <p>14. Какой вид деятельности вы предпочли бы?</p>
+                    <input type="radio" name="q14" value="A"> А) Работа в сфере культуры и искусства<br>
+                    <input type="radio" name="q14" value="B"> Б) Занятия наукой, связанной с изучением живых
+                    организмов<br>
+                    <input type="radio" name="q14" value="C"> В) Разработка новых видов транспорта<br>
+                    <input type="radio" name="q14" value="D"> Г) Работа в области маркетинга, рекламы
+                    <br><button type="button" class="button" onclick="nextQuestion(15)">Следующий вопрос</button>
+                </div>
+                <div class="question" style="display:none;" id="q15">
+                    <p>15. Что для вас важно в выборе профессии?</p>
+                    <input type="radio" name="q15" value="A"> А) Возможность быть полезным обществу<br>
+                    <input type="radio" name="q15" value="B"> Б) Возможность защищать природу<br>
+                    <input type="radio" name="q15" value="C"> В) Возможность постоянно совершенствоваться в технической
+                    области<br>
+                    <input type="radio" name="q15" value="D"> Г) Возможность анализировать и предсказывать события
+                    <br><button type="button" class="button" onclick="nextQuestion(16)">Следующий вопрос</button>
+                </div>
+                <div class="question" style="display:none;" id="q16">
+                    <p>16. Какой аспект работы вас привлекает?</p>
+                    <input type="radio" name="q16" value="A"> А) Взаимодействие с разными людьми<br>
+                    <input type="radio" name="q16" value="B"> Б) Изучение новых видов растений или животных<br>
+                    <input type="radio" name="q16" value="C"> В) Применение новейших технологий<br>
+                    <input type="radio" name="q16" value="D"> Г) Работа с большими массивами информации
+                    <br><button type="button" class="button" onclick="nextQuestion(17)">Следующий вопрос</button>
+                </div>
+                <div class="question" style="display:none;" id="q17">
+                    <p>17. Что вы хотели бы делать в профессиональной сфере?</p>
+                    <input type="radio" name="q17" value="A"> А) Помогать людям решать их проблемы<br>
+                    <input type="radio" name="q17" value="B"> Б) Сохранять и восстанавливать природные ресурсы<br>
+                    <input type="radio" name="q17" value="C"> В) Участвовать в создании новых машин и механизмов<br>
+                    <input type="radio" name="q17" value="D"> Г) Проектировать информационные системы
+                    <br><button type="button" class="button" onclick="nextQuestion(18)">Следующий вопрос</button>
+                </div>
+                <div class="question" style="display:none;" id="q18">
+                    <p>18. Какие задания вам кажутся наиболее привлекательными?</p>
+                    <input type="radio" name="q18" value="A"> А) Разработка учебных программ и методик<br>
+                    <input type="radio" name="q18" value="B"> Б) Проведение экологических экспериментов<br>
+                    <input type="radio" name="q18" value="C"> В) Изучение новых материалов и их свойств<br>
+                    <input type="radio" name="q18" value="D"> Г) Создание алгоритмов для обработки данных
+                    <br><button type="button" class="button" onclick="nextQuestion(19)">Следующий вопрос</button>
+                </div>
+                <div class="question" style="display:none;" id="q19">
+                    <p>19. В какой области вы хотели бы себя реализовать?</p>
+                    <input type="radio" name="q19" value="A"> А) В области социальной работы или психологии<br>
+                    <input type="radio" name="q19" value="B"> Б) В сфере охраны окружающей среды<br>
+                    <input type="radio" name="q19" value="C"> В) В индустрии высоких технологий<br>
+                    <input type="radio" name="q19" value="D"> Г) В сфере управления и администрирования
+                    <br><button type="button" class="button" onclick="nextQuestion(20)">Следующий вопрос</button>
+                </div>
+                <div class="question" style="display:none;" id="q20" style="display:none;">
+                    <p>20. Что для вас является приоритетом при выборе профессии?</p>
+                    <input type="radio" name="q20" value="A"> А) Возможность общаться и помогать людям<br>
+                    <input type="radio" name="q20" value="B"> Б) Возможность заниматься научными исследованиями<br>
+                    <input type="radio" name="q20" value="C"> В) Возможность работать с современной техникой<br>
+                    <input type="radio" name="q20" value="D"> Г) Возможность анализировать сложные системы
+                    <br><button type="button" class="button" onclick="showResult()">Показать результат</button>
+                </div>
+
+            </form>
+            <div class="result" id="result"></div>
+        </div>
+    </div>
+
+    <script>
+        function startTest() {
+            var name = document.getElementById("name").value;
+            if (name.trim() === "") {
+                alert("Пожалуйста, введите ваше имя.");
+                return;
+            }
+            document.getElementById("nameInput").style.display = "none";
+            document.getElementById("test").style.display = "block";
+            document.getElementById("name").setAttribute("disabled", true);
+        }
+
+        function nextQuestion(next) {
+            var current = next - 1;
+            var radios = document.getElementsByName('q' + current);
+            var answered = false;
+            for (var i = 0; i < radios.length; i++) {
+                if (radios[i].checked) {
+                    answered = true;
+                    break;
+                }
+            }
+            if (!answered) {
+                alert("Пожалуйста, выберите один из вариантов ответа.");
+                return;
+            }
+            document.getElementById("q" + current).style.display = "none";
+            document.getElementById("q" + next).style.display = "block";
+            document.getElementById("progress").innerText = next + "/20";
+        }
+
+        function showResult() {
+            var name = document.getElementById("name").value;
+            var scores = { A: 0, B: 0, C: 0, D: 0 };
+            for (var i = 1; i <= 20; i++) {
+                var radios = document.getElementsByName('q' + i);
+                for (var j = 0; j < radios.length; j++) {
+                    if (radios[j].checked) {
+                        scores[radios[j].value]++;
+                        break;
+                    }
+                }
+            }
+            var maxScore = Math.max(scores.A, scores.B, scores.C, scores.D);
+            var result = name + ", ваш профессиональный тип: ";
+            if (maxScore === scores.A) {
+                result += "Человек-Человек. Вам подходят профессии:<ul><li>Программное обеспечение</li><li>Переводческое дело</li><li>Учет и аудит</li></ul>";
+            } else if (maxScore === scores.B) {
+                result += "Человек-Природа. Вам подходят профессии:<ul><li>Технология переработки нефти и газа</li><li>Эксплуатация нефтяных и газовых месторождений</li></ul>";
+            } else if (maxScore === scores.C) {
+                result += "Человек-Техника. Вам подходят профессии:<ul><li>Программное обеспечение</li><li>Лабораторная технология</li><li>Электроснабжение</li><li>Техническое обслуживание, ремонт и эксплуатация электромеханического оборудования</li><li>Автоматизация и управление технологическими процессами</li><li>Технология машиностроения</li><li>Техническое обслуживание, ремонт и эксплуатация автомобильного транспорта</li></ul>";
+            } else {
+                result += "Человек-Знаковая система. Вам подходят профессии:<ul><li>Программное обеспечение</li><li>Строительство и эксплуатация зданий и сооружений</li><li>Автоматизация и управление технологическими процессами</li></ul>";
+            }
+            document.getElementById("result").innerHTML = result;
+
+        }
+    </script>
+</body>
+
+</html>
